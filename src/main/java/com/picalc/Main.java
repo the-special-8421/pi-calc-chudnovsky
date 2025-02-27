@@ -2,6 +2,8 @@ package com.picalc;
 
 import com.picalc.entities.BinarySplitResult;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -10,8 +12,10 @@ public class Main {
     private final static int SCALE = 1000000;
     private final static int CHUDNOVSKY_ITERATIONS = 70514;
 
-    public static void main(String[] args) {
-        System.out.println(chudnovsky(CHUDNOVSKY_ITERATIONS).toString().substring(0, SCALE+2));
+    public static void main(String[] args) throws IOException {
+        try (FileWriter writer = new FileWriter("pi_" + SCALE + ".txt")) {
+            writer.write(chudnovsky(CHUDNOVSKY_ITERATIONS).toString().substring(0, SCALE + 2));
+        }
     }
 
     private static BigDecimal chudnovsky(int n) {
