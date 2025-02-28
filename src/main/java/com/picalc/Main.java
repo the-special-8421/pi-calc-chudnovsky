@@ -9,9 +9,10 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class Main {
-    private final static int DIGITS_OF_PI = 10000000;
+    private static int DIGITS_OF_PI = 1000;
 
     public static void main(String[] args) throws IOException {
+        if (args.length > 0 && !args[0].isEmpty()) DIGITS_OF_PI = Integer.parseInt(args[0]);
         try (FileWriter writer = new FileWriter("pi_" + DIGITS_OF_PI + ".txt")) {
             writer.write(chudnovsky(BigDecimal.valueOf(DIGITS_OF_PI).divide(
                     BigDecimal.valueOf(14.18164), 0, RoundingMode.CEILING)).toString().substring(0, DIGITS_OF_PI + 2));
