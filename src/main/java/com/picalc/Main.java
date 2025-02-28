@@ -9,19 +9,19 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class Main {
-    private final static int SCALE = 1000000;
-    private final static int CHUDNOVSKY_ITERATIONS = 70514;
+    private final static int DIGITS_OF_PI = 10000000;
 
     public static void main(String[] args) throws IOException {
-        try (FileWriter writer = new FileWriter("pi_" + SCALE + ".txt")) {
-            writer.write(chudnovsky(CHUDNOVSKY_ITERATIONS).toString().substring(0, SCALE + 2));
+        try (FileWriter writer = new FileWriter("pi_" + DIGITS_OF_PI + ".txt")) {
+            writer.write(chudnovsky(BigDecimal.valueOf(DIGITS_OF_PI).divide(
+                    BigDecimal.valueOf(14.18164), 0, RoundingMode.CEILING)).toString().substring(0, DIGITS_OF_PI + 2));
         }
     }
 
-    private static BigDecimal chudnovsky(int n) {
-        BinarySplitResult P1nQ1nR1n = binarySplit(BigDecimal.ONE, BigDecimal.valueOf(n));
-        return BigDecimal.valueOf(426880).multiply(BigDecimal.valueOf(10005).sqrt(new MathContext(SCALE+2)).multiply(P1nQ1nR1n.getQab()))
-                .divide(BigDecimal.valueOf(13591409).multiply(P1nQ1nR1n.getQab()).add(P1nQ1nR1n.getRab()), SCALE+2, RoundingMode.HALF_EVEN);
+    private static BigDecimal chudnovsky(BigDecimal n) {
+        BinarySplitResult P1nQ1nR1n = binarySplit(BigDecimal.ONE, n);
+        return BigDecimal.valueOf(426880).multiply(BigDecimal.valueOf(10005).sqrt(new MathContext(DIGITS_OF_PI +2)).multiply(P1nQ1nR1n.getQab()))
+                .divide(BigDecimal.valueOf(13591409).multiply(P1nQ1nR1n.getQab()).add(P1nQ1nR1n.getRab()), DIGITS_OF_PI +2, RoundingMode.HALF_EVEN);
     }
 
     private static BinarySplitResult binarySplit(BigDecimal a, BigDecimal b) {
