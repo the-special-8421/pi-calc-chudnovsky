@@ -9,7 +9,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class Main {
-    private static int DIGITS_OF_PI = 100000;
+    private static int DIGITS_OF_PI = 10000;
 
     public static void main(String[] args) throws IOException {
         if (args.length > 0 && !args[0].isEmpty()) DIGITS_OF_PI = Integer.parseInt(args[0]);
