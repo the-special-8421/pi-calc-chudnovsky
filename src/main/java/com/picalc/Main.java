@@ -15,14 +15,14 @@ public class Main {
         if (args.length > 0 && !args[0].isEmpty()) DIGITS_OF_PI = Integer.parseInt(args[0]);
         try (FileWriter writer = new FileWriter("pi_" + DIGITS_OF_PI + ".txt")) {
             writer.write(chudnovsky(BigDecimal.valueOf(DIGITS_OF_PI).divide(
-                    BigDecimal.valueOf(14.18164), 0, RoundingMode.CEILING)).toString().substring(0, DIGITS_OF_PI + 2));
+                    BigDecimal.valueOf(14.18164), 0, RoundingMode.CEILING)).toString().substring(0, DIGITS_OF_PI+5));
         }
     }
 
     private static BigDecimal chudnovsky(BigDecimal n) {
         BinarySplitResult P1nQ1nR1n = binarySplit(BigDecimal.ONE, n);
-        return BigDecimal.valueOf(426880).multiply(BigDecimal.valueOf(10005).sqrt(new MathContext(DIGITS_OF_PI +2)).multiply(P1nQ1nR1n.getQab()))
-                .divide(BigDecimal.valueOf(13591409).multiply(P1nQ1nR1n.getQab()).add(P1nQ1nR1n.getRab()), DIGITS_OF_PI +2, RoundingMode.HALF_EVEN);
+        return BigDecimal.valueOf(426880).multiply(BigDecimal.valueOf(10005).sqrt(new MathContext(DIGITS_OF_PI+5)).multiply(P1nQ1nR1n.getQab()))
+                .divide(BigDecimal.valueOf(13591409).multiply(P1nQ1nR1n.getQab()).add(P1nQ1nR1n.getRab()), DIGITS_OF_PI+5, RoundingMode.HALF_EVEN);
     }
 
     private static BinarySplitResult binarySplit(BigDecimal a, BigDecimal b) {
